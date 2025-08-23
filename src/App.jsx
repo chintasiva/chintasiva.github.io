@@ -8,6 +8,7 @@ import Typewriter from "typewriter-effect";
 import ParticlesBackground from "./particles/ParticlesBackground";
 import DevImage3D from "./devImage/DevImage3D";
 import DevIntroHover from "./DevIntro/DevIntroHover";
+import { HiMenu, HiX } from 'react-icons/hi';
 import {
   SiReact,
   SiRedux,
@@ -155,6 +156,7 @@ const NAV = [
   { id: "about", label: "Profile" },
   { id: "home", label: "Home" },
   { id: "stack", label: "Tech" },
+  { id: "projects", label: "Projects" },
   { id: "contact", label: "Contact" },
 ];
 
@@ -183,16 +185,12 @@ function Navbar({ theme, setTheme }) {
   const active = useScrollSpy(NAV.map((n) => n.id));
 
   return (
-    <header className="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-[92%] md:w-[70%] rounded-3xl shadow-2xl backdrop-blur-xl border border-white/20 bg-white/10 dark:bg-black/30 transition-all">
+    <header
+      style={{ zIndex: "10000000000000000" }}
+      className="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-[92%] md:w-[70%] rounded-3xl shadow-2xl backdrop-blur-xl border border-white/20 bg-white/10 dark:bg-black/30 transition-all"
+    >
       <div className="flex items-center justify-between px-8 py-4">
         {/* Logo */}
-        {/* <a
-          href="#home"
-          className="text-2xl font-extrabold tracking-tight relative"
-          style={{ color: "var(--fg)" }}
-        >
-          dev<span className="text-[var(--primary)]">/portfolio</span>
-        </a> */}
         <AnimatedLogo />
 
         {/* Desktop Nav */}
@@ -201,7 +199,9 @@ function Navbar({ theme, setTheme }) {
             <a
               key={item.id}
               href={`#${item.id}`}
-              className={`relative text-sm font-semibold uppercase tracking-wide transition-all duration-300 ${active === item.id ? "text-[var(--primary)]" : "text-[var(--fg)]"
+              className={`relative text-sm font-semibold uppercase tracking-wide transition-all duration-300 ${active === item.id
+                  ? "text-[var(--primary)]"
+                  : "text-[var(--fg)]"
                 }`}
             >
               {item.label}
@@ -214,18 +214,20 @@ function Navbar({ theme, setTheme }) {
           <ThemeSwitcher theme={theme} setTheme={setTheme} />
         </nav>
 
-        {/* Mobile Menu */}
+        {/* Mobile Menu Button */}
         <button
           className="md:hidden p-3 rounded-xl border border-white/30 text-[var(--fg)] hover:shadow-[0_0_10px_var(--primary)] transition"
           onClick={() => setOpen(!open)}
         >
-          {open ? <X size={22} /> : <Menu size={22} />}
+          {open ? <HiX size={22} /> : <HiMenu size={22} />}
         </button>
       </div>
 
       {/* Mobile Drawer */}
       <div
-        className={`md:hidden transition-all duration-500 overflow-hidden ${open ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+        className={`md:hidden transition-all duration-500 ${open
+            ? "max-h-[500px] opacity-100 overflow-visible"
+            : "max-h-0 opacity-0 overflow-hidden"
           }`}
       >
         <div className="flex flex-col gap-4 px-8 py-6 border-t border-white/20 bg-white/20 dark:bg-black/40 backdrop-blur-xl rounded-b-3xl">
@@ -245,7 +247,6 @@ function Navbar({ theme, setTheme }) {
     </header>
   );
 }
-
 
 
 
@@ -574,7 +575,7 @@ function ProjectsSection() {
   ];
 
   return (
-    <section className="bg-[var(--bg)] min-h-screen flex flex-col justify-center items-center py-40">
+    <section id="projects" className="bg-[var(--bg)] min-h-screen flex flex-col justify-center items-center py-40">
       {projects.map((project, i) => (
         <motion.div
           key={i}
@@ -731,7 +732,7 @@ function Footer() {
   return (
     <footer className="py-10 border-t" style={{ borderColor: "var(--ring)", background: "var(--card)" }}>
       <div className="mx-auto max-w-6xl px-4 flex flex-col md:flex-row items-center justify-between gap-4">
-        <p className="text-sm" style={{ color: "var(--muted)" }}>© {new Date().getFullYear()} Your Name. All rights reserved.</p>
+        <p className="text-sm" style={{ color: "var(--muted)" }}>© {new Date().getFullYear()} Chinta Sivanarayana. All rights reserved.</p>
         <div className="flex items-center gap-3" style={{ color: "var(--muted)" }}>
           <a href="#home" className="hover:opacity-80">Back to top</a>
         </div>
